@@ -10,4 +10,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Publication> Publications { get; set; }
+    public DbSet<Coment> Coments { get; set; }
 }

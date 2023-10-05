@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<CourseSite.Models.Publication>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Головна";
 }
 
 <div class="text-center">
@@ -13,9 +13,9 @@
                 <h3>@publication.Title</h3>
                 <p>@publication.Text</p>
                 <p>@publication.DateTime @publication.Author</p>
+                <p><a href="/Home/Show/@(publication.Id-9)">Дивитись</a></p> @* TODO -9 *@
             </div>
         }
     </div>
 
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

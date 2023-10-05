@@ -27,6 +27,23 @@ public class HomeController : Controller
         return View();
     }
 
+    //[HttpGet]
+    public IActionResult Show(int id)
+    {
+        var publication = _context.Publications.ToList()[id];
+        ViewBag.Publication = publication;
+
+        // var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
+        // ViewBag.Coments = coments;
+        return View();
+    }
+
+    [HttpPost]
+    public string Show()
+    {
+        return "Надіслано";
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
