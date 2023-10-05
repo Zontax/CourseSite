@@ -17,11 +17,14 @@
     <div>
         <h3>Написати коментар</h3>
         <form method="post">
-            <input type="hidden" value="@ViewBag.BookId" name="BookId" />
+
+
             <table>
+                <input type="hidden" name="Id" value="@ViewBag.Publication.Id" />
+                <input type="hidden" value="@ViewBag.Publication.Id" name="PublicationId" />
                 <tr>
                     <td>
-                        <p>Введіть своє ім'я </p>
+                        <p>Введіть своє ім'я</p>
                     </td>
                     <td><input type="text" name="Author" /> </td>
                 </tr>
@@ -42,11 +45,10 @@
         </form>
     </div>
 
-    <h2>Коментарі</h2>
-    @* @foreach (var com in ViewBag.Coments)
+    <h3>Коментарі</h3>
+    @foreach (var com in ViewBag.Coments)
     {
-    <div>
-    <p>@com.Author</p>
-    <p>@com.Text</p>
-    </div>
-    } *@
+        <div>
+            <p><b>@(com.Author): </b> @com.Text</p>
+        </div>
+    }

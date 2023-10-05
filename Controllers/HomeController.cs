@@ -27,21 +27,42 @@ public class HomeController : Controller
         return View();
     }
 
-    //[HttpGet]
+    [HttpGet]
     public IActionResult Show(int id)
     {
         var publication = _context.Publications.ToList()[id];
         ViewBag.Publication = publication;
 
-        // var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
-        // ViewBag.Coments = coments;
+        var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
+        ViewBag.Coments = coments;
         return View();
     }
 
+    // [HttpPost]
+    // public string Show()
+    // {
+    //     return "Надіслано";
+    // }
+
     [HttpPost]
-    public string Show()
+    public IActionResult Show(int id, string author, string text) // Додав параметри author та text
     {
-        return "Надіслано";
+        if (!string.IsNullOrEmpty(author) && !string.IsNullOrEmpty(text))
+        {
+            Coment coment = new(id, author, text);
+            _context.Coments.Add(coment);
+            _context.SaveChanges();
+
+            // Після успішного додавання коментаря редіректимо на ту саму сторінку
+            return RedirectToAction("Show", new { id = id });
+        }
+
+        // Якщо дані недійсні, залишаємо користувача на тій же сторінці.
+        var publication = _context.Publications.FirstOrDefault(p => p.Id == id);
+        ViewBag.Publication = publication;
+        var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
+        ViewBag.Coments = coments;
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
