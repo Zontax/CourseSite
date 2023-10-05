@@ -8,7 +8,7 @@
     <h1 class="display-4"></h1>
 
     <div class="publication" style="background-color: rgb(199, 199, 199);">
-        <h3>@ViewBag.Publication.Title</h3>
+        <h3>@(ViewBag.Publication.Id) @ViewBag.Publication.Title</h3>
         <p>@ViewBag.Publication.Text</p>
         <p>@ViewBag.Publication.DateTime @ViewBag.Publication.Author</p>
     </div>
@@ -17,10 +17,8 @@
     <div>
         <h3>Написати коментар</h3>
         <form method="post">
-
-
             <table>
-                <input type="hidden" name="Id" value="@ViewBag.Publication.Id" />
+                @* <input type="hidden" name="Id" value="@ViewBag.Publication.Id" /> *@
                 <input type="hidden" value="@ViewBag.Publication.Id" name="PublicationId" />
                 <tr>
                     <td>
@@ -46,9 +44,9 @@
     </div>
 
     <h3>Коментарі</h3>
-    @foreach (var com in ViewBag.Coments)
+    @foreach (var coment in ViewBag.Coments)
     {
         <div>
-            <p><b>@(com.Author): </b> @com.Text</p>
+            <p><b>@(coment.Author): </b> @coment.Text</p>
         </div>
     }

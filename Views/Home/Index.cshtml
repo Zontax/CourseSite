@@ -10,10 +10,10 @@
         @foreach (var publication in ViewBag.Publications)
         {
             <div class="publication" style="background-color: rgb(199, 199, 199);">
-                <h3>@publication.Title</h3>
+                <h3><b>@(publication.Id)</b> @publication.Title</h3>
                 <p>@publication.Text</p>
                 <p>@publication.DateTime @publication.Author</p>
-                <p><a href="/Home/Show/@(publication.Id-1)">Дивитись</a></p>
+                <p><a href="/Home/Show/@(publication.Id)">Дивитись</a></p>
             </div>
         }
     </div>

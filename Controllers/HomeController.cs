@@ -17,7 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var publications = _context.Publications.ToList();
+        var publications = _context.Publications.ToList().Skip(1);
         ViewBag.Publications = publications;
         return View();
     }
@@ -30,10 +30,10 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Show(int id)
     {
-        var publication = _context.Publications.ToList()[id];
+        var publication = _context.Publications.ToList()[id - 1];
         ViewBag.Publication = publication;
 
-        var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
+        var coments = _context.Coments.Where(x => x.PublicationId == id - 1).ToList();
         ViewBag.Coments = coments;
         return View();
     }
@@ -49,15 +49,15 @@ public class HomeController : Controller
     {
         if (!string.IsNullOrEmpty(author) && !string.IsNullOrEmpty(text))
         {
-            Coment coment = new(id, author, text);
+            Coment coment = new(id - 1, author, text);
             _context.Coments.Add(coment);
             _context.SaveChanges();
 
             // Після успішного додавання коментаря редіректимо на ту саму сторінку
             return RedirectToAction("Show", new { id = id });
         }
-
         // Якщо дані недійсні, залишаємо користувача на тій же сторінці.
+
         var publication = _context.Publications.FirstOrDefault(p => p.Id == id);
         ViewBag.Publication = publication;
         var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();
