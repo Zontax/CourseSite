@@ -16,21 +16,21 @@ public class Publication
     public string Author { get; set; }
 
     [Display(Name = "Дата та час")]
-    public DateTime DateTime { get; set; }
+    public DateTime Date { get; set; }
 
     public Publication(string title, string text, string author)
     {
         Title = title;
         Text = text;
         Author = author;
-        DateTime = DateTime.Now;
+        Date = DateTime.Now;
     }
 
-    public Publication(string title, string text, string author, DateTime dateTime)
+    public Publication(string title, string text, string author, DateTime date)
     {
         Title = title;
         Text = text;
         Author = author;
-        DateTime = dateTime;
+        Date = date;
     }
 }

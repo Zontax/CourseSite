@@ -31,21 +31,15 @@ public class HomeController : Controller
     public IActionResult Show(int id)
     {
         var publication = _context.Publications.ToList()[id - 1];
-        ViewBag.Publication = publication;
-
         var coments = _context.Coments.Where(x => x.PublicationId == id - 1).ToList();
+        ViewBag.Publication = publication;
         ViewBag.Coments = coments;
+
         return View();
     }
 
-    // [HttpPost]
-    // public string Show()
-    // {
-    //     return "Надіслано";
-    // }
-
     [HttpPost]
-    public IActionResult Show(int id, string author, string text) // Додав параметри author та text
+    public IActionResult Show(int id, string author, string text)
     {
         if (!string.IsNullOrEmpty(author) && !string.IsNullOrEmpty(text))
         {
@@ -56,8 +50,8 @@ public class HomeController : Controller
             // Після успішного додавання коментаря редіректимо на ту саму сторінку
             return RedirectToAction("Show", new { id = id });
         }
-        // Якщо дані недійсні, залишаємо користувача на тій же сторінці.
 
+        // Якщо дані недійсні, залишаємо користувача на тій же сторінці.
         var publication = _context.Publications.FirstOrDefault(p => p.Id == id);
         ViewBag.Publication = publication;
         var coments = _context.Coments.Where(x => x.PublicationId == id).ToList();

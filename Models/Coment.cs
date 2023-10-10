@@ -13,7 +13,7 @@ public class Coment
     public string Text { get; set; }
 
     [Display(Name = "Дата та час")]
-    public DateTime DateTime { get; set; }
+    public DateTime Date { get; set; }
 
     public int PublicationId { get; set; }
     public Publication Publication { get; set; }
@@ -23,14 +23,14 @@ public class Coment
         PublicationId = publicationId;
         Text = text;
         Author = author;
-        DateTime = DateTime.Now;
+        Date = DateTime.Now;
     }
 
-    public Coment(int publicationId, string author, string text, DateTime dateTime)
+    public Coment(int publicationId, string author, string text, DateTime date)
     {
         PublicationId = publicationId;
         Text = text;
         Author = author;
-        DateTime = dateTime;
+        Date = date;
     }
 }
